@@ -35,9 +35,9 @@ public class UI {
 		System.out.flush();
 	}
 	
-	public static ChessPosition readChessPosition(Scanner entrada) {
+	public static ChessPosition readChessPosition(Scanner keyboard) {
 		try {
-		String s = entrada.nextLine();
+		String s = keyboard.nextLine();
 		char column = s.charAt(0);
 		int row = Integer.parseInt(s.substring(1));
 		return new ChessPosition(column, row);
