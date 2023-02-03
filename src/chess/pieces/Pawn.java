@@ -60,6 +60,6 @@ boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 	
 	@Override
 	public String toString() {
-		return "p";
+		return "P";
 	}
 }
