@@ -14,7 +14,7 @@ public class Program {
 
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);
+		Scanner keyboard = new Scanner(System.in);
 		ChessMatch chessMatch = new ChessMatch();
 		List<ChessPiece> captured = new ArrayList<>();
 
@@ -24,14 +24,14 @@ public class Program {
 				UI.printMatch(chessMatch, captured);
 				System.out.println();
 				System.out.print("Source: ");
-				ChessPosition source = UI.readChessPosition(sc);
+				ChessPosition source = UI.readChessPosition(keyboard);
 
 				boolean[][] possibleMoves = chessMatch.possibleMoves(source);
 				UI.clearScreen();
 				UI.printBoard(chessMatch.getPieces(), possibleMoves);
 				System.out.println();
 				System.out.print("Target: ");
-				ChessPosition target = UI.readChessPosition(sc);
+				ChessPosition target = UI.readChessPosition(keyboard);
 
 				ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
 
@@ -40,15 +40,19 @@ public class Program {
 				}
 				if (chessMatch.getPromoted() != null) {
 					System.out.print("Enter piece for promotion (B/N/R/Q): ");
-					String type = sc.nextLine();
+					String type = keyboard.nextLine().toUpperCase();
+					while (!type.equals("B") && !type.equals("N") && !type.equals("R") & !type.equals("Q")) {
+						System.out.print("Invalid value! Enter piece for promotion (B/N/R/Q): ");
+						type = keyboard.nextLine().toUpperCase();
+					}
 					chessMatch.replacePromotedPiece(type);
 				}
 			} catch (ChessException e) {
 				System.out.println(e.getMessage());
-				sc.nextLine();
+				keyboard.nextLine();
 			} catch (InputMismatchException e) {
 				System.out.println(e.getMessage());
-				sc.nextLine();
+				keyboard.nextLine();
 			}
 		}
 		UI.clearScreen();
